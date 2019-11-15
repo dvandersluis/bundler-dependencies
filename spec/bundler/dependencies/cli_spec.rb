@@ -15,9 +15,10 @@ RSpec.describe Bundler::Dependencies::CLI do
     context 'without a minimum' do
       it 'outputs all gems' do
         expect { subject }.to output(<<~STRING).to_stdout
-          4 gems scanned; 20 dependencies found
+          5 gems scanned; 20 dependencies found
 
           Unique dependencies per gem:
+              8  rubocop-rspec
               7  rubocop
               5  rspec
               2  pry
@@ -31,12 +32,29 @@ RSpec.describe Bundler::Dependencies::CLI do
 
       it 'only outputs gems with at least N dependencies' do
         expect { subject }.to output(<<~STRING).to_stdout
-          4 gems scanned; 20 dependencies found
-          2 gems with at least 5 dependencies.
+          5 gems scanned; 20 dependencies found
+          3 gems with at least 5 dependencies.
 
           Unique dependencies per gem:
+              8  rubocop-rspec
               7  rubocop
               5  rspec
+        STRING
+      end
+    end
+
+    context 'when excluding gems' do
+      let(:args) { %w(--without rubocop pry) }
+
+      it 'does not output excluded gems' do
+        expect { subject }.to output(<<~STRING).to_stdout
+          5 gems scanned; 20 dependencies found
+          3 gems found after applying exclusions.
+
+          Unique dependencies per gem:
+              5  rspec
+              0  rubocop-rspec
+              0  rake
         STRING
       end
     end
@@ -70,6 +88,15 @@ RSpec.describe Bundler::Dependencies::CLI do
             - rainbow
             - ruby-progressbar
             - unicode-display_width
+          rubocop-rspec
+            - rubocop
+              - jaro_winkler
+              - parallel
+              - parser
+                - ast
+              - rainbow
+              - ruby-progressbar
+              - unicode-display_width
         STRING
       end
     end

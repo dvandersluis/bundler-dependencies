@@ -13,46 +13,25 @@ module Bundler
       desc 'check', 'Checks for gems that install too many dependencies'
       method_option :minimum, type: :numeric, desc: 'Report only gems with a minimum N dependencies', aliases: ['-m', '--min'], default: 0
       method_option :path, type: :string, desc: 'Path to Gemfile.lock to scan', default: Bundler.default_lockfile
+      method_option :without, type: :array, desc: 'Gems to ignore', aliases: ['-W']
 
       def check
-        scanner = Scanner.new(options.path)
-        counts = scanner.counts(min: options.minimum)
-
-        say(scanner.to_s, :bold)
-        output_counts(counts)
+        Check.new(options).output
       end
 
       desc 'graph [GEM]', 'Outputs a dependency graph'
       method_option :path, type: :string, desc: 'Path to Gemfile.lock to scan', default: Bundler.default_lockfile
+      method_option :without, type: :array, desc: 'Gems to ignore', aliases: ['-W']
 
       def graph(gem = nil)
         scanner = Scanner.new(options.path)
-        graph = gem ? [Spec.find(gem)] : scanner.graph
-        Visitors::ShellTree.new.walk(graph, shell)
+        graph = gem ? Graph.new(specs: [Spec.find(gem)]) : scanner.graph
+        Visitors::ShellTree.new.walk(graph.without(*options.without), shell)
       end
 
       desc 'version', 'Prints the bundler-dependencies version'
       def version
         puts "#{File.basename($PROGRAM_NAME)} #{VERSION}"
-      end
-
-    protected
-
-      def print_warning(message)
-        say(message, :yellow)
-      end
-
-      def output_counts(counts)
-        say("#{counts.count} gems with at least #{options.minimum} dependencies.", %i(bold yellow)) if options.minimum > 0
-
-        puts
-        puts 'Unique dependencies per gem:'
-
-        counts.each do |gem, count|
-          next if gem == File.basename($PROGRAM_NAME)
-
-          puts format('%5d  %s', count, gem)
-        end
       end
     end
   end

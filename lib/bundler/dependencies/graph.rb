@@ -26,6 +26,15 @@ module Bundler
         gems.each(&block)
       end
 
+      def counts(min: 0)
+        @counts ||= map do |gem|
+          count = gem.dependency_count
+          next if count < min
+
+          [gem.name, gem.dependency_count]
+        end.compact.sort_by(&:last).reverse.to_h
+      end
+
       def delete(*specs)
         specs.each do |gem|
           spec = Spec.new(gem) unless gem.is_a?(Spec)

@@ -8,6 +8,8 @@ require 'bundler/dependencies/scanner'
 require 'bundler/dependencies/spec'
 require 'bundler/dependencies/visitor'
 
+require 'bundler/dependencies/cli/check'
+
 require 'bundler/dependencies/visitors/shell_tree'
 
 module Bundler

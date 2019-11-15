@@ -16,15 +16,6 @@ module Bundler
         specs.count
       end
 
-      def counts(min: 0)
-        @counts ||= graph.map do |gem|
-          count = gem.dependency_count
-          next if count < min
-
-          [gem.name, gem.dependency_count]
-        end.compact.sort_by(&:last).reverse.to_h
-      end
-
       def to_s
         "#{gem_count} gems scanned; #{spec_count} dependencies found"
       end
