@@ -15,6 +15,8 @@ Layout/IndentFirstArrayElement:
 
 RSpec/ExampleLength:
   Max: 10
+  Exclude:
+    - spec/bundler/dependencies/cli_spec.rb
 
 Style/FormatStringToken:
   Enabled: false
