@@ -7,6 +7,14 @@ inherit_mode:
 
 AllCops:
   TargetRubyVersion: 2.6
+  Exclude:
+    - .pryrc
+
+Layout/IndentFirstArrayElement:
+  EnforcedStyle: consistent
+
+RSpec/ExampleLength:
+  Max: 10
 
 Style/NumericPredicate:
   Enabled: false

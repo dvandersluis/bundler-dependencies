@@ -16,15 +16,10 @@ module Bundler
 
       def check
         scanner = Scanner.new(options.path)
-        counts = scanner.counts(options.minimum)
+        counts = scanner.counts(min: options.minimum)
 
-        say("#{scanner.gem_count} gems scanned; #{scanner.spec_count} dependencies found", :bold)
-        say("#{counts.count} gems with at least #{options.minimum} dependencies.", [:bold, :yellow]) if options.minimum > 0
-
-        counts.each do |gem, count|
-          next if gem == File.basename($PROGRAM_NAME)
-          puts "  #{gem}: #{count}"
-        end
+        say(scanner.to_s, :bold)
+        output_counts(counts)
       end
 
       desc 'graph [GEM]', 'Outputs a dependency graph'
@@ -32,8 +27,8 @@ module Bundler
 
       def graph(gem = nil)
         scanner = Scanner.new(options.path)
-        graph = gem ? { gem => scanner.send(:graph_of, gem) } : scanner.graph
-        walk_graph(graph)
+        graph = gem ? [Spec.find(gem)] : scanner.graph
+        Visitors::ShellTree.new.walk(graph, shell)
       end
 
       desc 'version', 'Prints the bundler-dependencies version'
@@ -43,26 +38,17 @@ module Bundler
 
     protected
 
-      def say(message = '', color = nil)
-        color = nil unless $stdout.tty?
-        super(message.to_s, color)
-      end
-
       def print_warning(message)
         say(message, :yellow)
       end
 
-    private
+      def output_counts(counts)
+        say("#{counts.count} gems with at least #{options.minimum} dependencies.", %i(bold yellow)) if options.minimum > 0
 
-      def walk_graph(graph, level = 0)
-        graph.each do |name, children|
-          if level > 0
-            print '  ' * level
-            print '- '
-          end
+        counts.each do |gem, count|
+          next if gem == File.basename($PROGRAM_NAME)
 
-          say(name, (:bold if level == 0))
-          walk_graph(children, level + 1) if children
+          puts "  #{gem}: #{count}"
         end
       end
     end

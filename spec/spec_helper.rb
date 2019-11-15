@@ -1,14 +1,27 @@
 require 'bundler/setup'
 require 'bundler/dependencies'
+require 'pry'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
 
-  # Disable RSpec exposing methods globally on `Module` and `main`
+  config.filter_run_when_matching(:focus)
   config.disable_monkey_patching!
 
   config.expect_with(:rspec) do |c|
     c.syntax = :expect
   end
+
+  config.order = :random
+  Kernel.srand(config.seed)
+
+  RSpec.shared_context('setup') do
+    let(:lockfile_path) { File.expand_path('support/Gemfile.lock', __dir__) }
+
+    let!(:scanner) { Bundler::Dependencies::Scanner.new(lockfile_path) }
+    let(:graph) { scanner.graph }
+  end
+
+  config.include_context('setup')
 end
