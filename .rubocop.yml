@@ -1,0 +1,12 @@
+inherit_gem:
+  rubocop_defaults: .rubocop.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+AllCops:
+  TargetRubyVersion: 2.6
+
+Style/NumericPredicate:
+  Enabled: false
