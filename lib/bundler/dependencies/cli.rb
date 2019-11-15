@@ -45,10 +45,13 @@ module Bundler
       def output_counts(counts)
         say("#{counts.count} gems with at least #{options.minimum} dependencies.", %i(bold yellow)) if options.minimum > 0
 
+        puts
+        puts 'Unique dependencies per gem:'
+
         counts.each do |gem, count|
           next if gem == File.basename($PROGRAM_NAME)
 
-          puts "  #{gem}: #{count}"
+          puts format('%5d  %s', count, gem)
         end
       end
     end

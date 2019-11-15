@@ -16,5 +16,8 @@ Layout/IndentFirstArrayElement:
 RSpec/ExampleLength:
   Max: 10
 
+Style/FormatStringToken:
+  Enabled: false
+
 Style/NumericPredicate:
   Enabled: false
