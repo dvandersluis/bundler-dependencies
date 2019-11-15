@@ -7,8 +7,8 @@ module Bundler
 
       def self.new(name, dependencies = [])
         name = name.to_sym
-        spec = find(name) || super(name, dependencies)
-        spec.dependencies = dependencies.map { |d| new(d.name) } if dependencies.any?
+        spec = find(name) || super(name)
+        spec.dependencies = Graph.new(specs: dependencies.map { |d| new(d) }) if dependencies.any?
         spec
       end
 
@@ -16,9 +16,9 @@ module Bundler
         SPECS[name.to_sym]
       end
 
-      def initialize(name, *)
+      def initialize(name)
         @name = name
-        @dependencies = []
+        @dependencies = Graph.new
 
         SPECS[name] = self
       end

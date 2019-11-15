@@ -5,7 +5,7 @@ module Bundler
 
       def initialize(path = Bundler.default_lockfile)
         @lockfile = LockfileParser.new(Bundler.read_file(path))
-        @graph = Graph.new(lockfile)
+        @graph = Graph.new(lockfile: lockfile)
       end
 
       def gem_count

@@ -24,4 +24,10 @@ RSpec.configure do |config|
   end
 
   config.include_context('setup')
+
+  config.include(Module.new do
+    def walk(graph)
+      puts Bundler::Dependencies::Visitors::ShellTree.new.walk(graph)
+    end
+  end)
 end
