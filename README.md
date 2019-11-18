@@ -4,6 +4,10 @@
 
 Bundler plugin to inspect dependencies of gems used by your project.
 
+A project's `Gemfile.lock` shows some basic information about what gems are directly depended on by other gems, but this extension takes it a step further and enumerates the entire dependency tree of each gem being depended on. For instance, `rails` has 12 direct dependencies, but altogether installs **40** gems.
+
+Each dependency is a potential point of failure, vulnerability, maintenance and *complexity* for a project, so the goal of `bundle dependencies` is to shed some light on what's being installed by what. This shouldn't stop you from installing gems that are useful to your project, but to be able to make an educated decision if a gem with 25 dependencies is a worthy tradeoff, for example.  
+
 ## Commands
 
 ### Count
@@ -31,6 +35,11 @@ bundle dependencies graph GEMNAME
 * `--path PATH`: User the Gemfile for the project at `PATH`, rather than the current project's Gemfile.
 * `--without foo bar baz`/`-W foo bar baz`: Exclude the listed gems from the scan. Any uses either directly in your Gemfile or as dependencies will be excluded, and not be counted.
 * `--without-rails`/`-R`: Quick option to exclude all 1st party Rails gems from the scan.
+
+### Getting Help
+
+* `bundle dependencies help` to get an overview of all commands.
+* `bundle dependencies help COMMAND` to get help for a specific command.
 
 ## Development
 
