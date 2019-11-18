@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.version       = Bundler::Dependencies::VERSION
   spec.authors       = ['Daniel Vandersluis']
   spec.email         = ['daniel.vandersluis@gmail.com']
+  spec.licenses      = ['MIT']
 
   spec.summary       = 'Find gems in your Gemfile with too many dependencies'
   spec.homepage      = 'https://github.com/dvandersluis/bundler-dependencies'
@@ -14,7 +15,7 @@ Gem::Specification.new do |spec|
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
   if spec.respond_to?(:metadata)
-    spec.metadata['allowed_push_host'] = "TODO: Set to 'http://mygemserver.com'"
+    spec.metadata['allowed_push_host'] = "https://rubygems.org"
 
     spec.metadata['homepage_uri'] = spec.homepage
     spec.metadata['source_code_uri'] = spec.homepage
