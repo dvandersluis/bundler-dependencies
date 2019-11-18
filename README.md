@@ -2,13 +2,17 @@
 
 Inspect dependencies for gems.
 
-## Usage
+## Commands
 
-Check how many dependencies each gem in the Gemfile has:
+### Count
+
+Check how many dependencies each gem in the Gemfile has (use the `--minimum N` switch to limit the output to gems with at least `N` dependencies):
 
 ```sh
-bundle dependencies count [--min N] 
+bundle dependencies [count] [--minimum N] 
 ```
+
+### Graph
 
 See a graph of all dependencies:
 ```sh
@@ -19,6 +23,12 @@ See a graph of all dependencies for a specific gem:
 ```sh
 bundle dependencies graph GEMNAME
 ```
+
+### Command Options
+
+* `--path PATH`: Check the Gemfile at `PATH`, rather than the current project's Gemfile.
+* `--without foo bar baz`/`-W foo bar baz`: Exclude the listed gems from the scan. Any uses either directly in your Gemfile or as dependencies will be excluded, and not be counted.
+* `--without-rails`/`-R`: Quick option to exclude all 1st party Rails gems from the scan.
 
 ## Development
 
