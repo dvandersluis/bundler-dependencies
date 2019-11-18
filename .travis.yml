@@ -1,7 +1,22 @@
 ---
-sudo: false
+os: linux
 language: ruby
 cache: bundler
 rvm:
-  - 2.6.2
+  - 2.6.5
+  - 2.5.7
+  - 2.4.9
+  - 2.7.0-preview2
 before_install: gem install bundler -v 2.0.1
+
+jobs:
+  include:
+    - stage: lint
+      rvm: 2.6.5
+      script: bundle exec rubocop
+  allow_failures:
+    - rvm: 2.7.0.preview2
+
+stages:
+  - lint
+  - test
