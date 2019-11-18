@@ -8,8 +8,8 @@ RSpec.describe Bundler::Dependencies::CLI do
 
   subject { run_task(task, *args) }
 
-  describe '#check' do
-    let(:task) { :check }
+  describe '#count' do
+    let(:task) { :count }
     let(:args) { [] }
 
     context 'without a minimum' do

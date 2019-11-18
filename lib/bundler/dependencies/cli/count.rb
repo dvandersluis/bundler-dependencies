@@ -1,7 +1,7 @@
 module Bundler
   module Dependencies
     class CLI < ::Thor
-      class Check < Command
+      class Count < Command
       private
 
         def to_s

@@ -7,7 +7,7 @@ Inspect dependencies for gems.
 Check how many dependencies each gem in the Gemfile has:
 
 ```sh
-bundle dependencies check [--min N] 
+bundle dependencies count [--min N] 
 ```
 
 See a graph of all dependencies:
