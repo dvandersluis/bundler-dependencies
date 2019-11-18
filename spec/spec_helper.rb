@@ -17,8 +17,8 @@ RSpec.configure do |config|
   Kernel.srand(config.seed)
 
   RSpec.shared_context('setup') do
-    let(:lockfile_path) { File.expand_path('support/Gemfile.lock', __dir__) }
-
+    let(:lockfile) { 'Gemfile.lock' }
+    let(:lockfile_path) { File.expand_path("support/Gemfiles/#{lockfile}", __dir__) }
     let!(:scanner) { Bundler::Dependencies::Scanner.new(lockfile_path) }
     let(:graph) { scanner.graph }
   end

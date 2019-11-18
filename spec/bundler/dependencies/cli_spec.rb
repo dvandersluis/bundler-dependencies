@@ -146,4 +146,49 @@ RSpec.describe Bundler::Dependencies::CLI do
       end
     end
   end
+
+  describe '#find' do
+    let(:lockfile) { 'nested.lock' }
+    let(:task) { :find }
+
+    context 'for a gem in the bundle' do
+      let(:args) { %w(ast) }
+
+      it 'outputs all the dependency paths for the gem' do
+        expect { subject }.to output(<<~STRING).to_stdout
+          3 gems depend on ast:
+
+          codeshift
+            * codeshift → parser → ast
+
+          gelauto
+            * gelauto → parser → ast
+
+          rubocop_defaults
+            * rubocop_defaults → rubocop → parser → ast
+            * rubocop_defaults → rubocop-rspec → rubocop → parser → ast
+
+        STRING
+      end
+    end
+
+    context 'for a gem not in the bundle' do
+      let(:args) { 'foo' }
+
+      it 'outputs an error message' do
+        expect { subject }.to raise_error(SystemExit).
+          and output(<<~STRING).to_stderr
+            No gems in the bundle depend on foo.
+        STRING
+      end
+    end
+
+    context 'when passed help' do
+      let(:args) { %w(help) }
+
+      it 'outputs the help' do
+        expect { subject }.to output_help(:find)
+      end
+    end
+  end
 end

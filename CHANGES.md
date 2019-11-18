@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ## 0.6.0 (2019-11-18)
+* Add `find` command to find all gems in the Gemfile which depend on a given gem.
 * Fix crash when calling `bundle dependencies graph` with a gem that isn't in the bundle.
 * Handle invoking a command with help as the first argument (show the command's help).
 

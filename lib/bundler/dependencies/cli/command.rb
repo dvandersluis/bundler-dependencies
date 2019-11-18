@@ -50,6 +50,10 @@ module Bundler
           end
         end
 
+        def gems
+          @gems ||= graph.without(*without)
+        end
+
         def warn(message)
           say(message, %i(bold yellow))
         end

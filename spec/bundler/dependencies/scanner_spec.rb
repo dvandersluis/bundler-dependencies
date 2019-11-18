@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 RSpec.describe Bundler::Dependencies::Scanner do
-  subject { described_class.new(File.expand_path('../../support/Gemfile.lock', __dir__)) }
+  subject { described_class.new(lockfile_path) }
 
   describe '#gem_count' do
     it 'returns the number of gems directly depended on' do

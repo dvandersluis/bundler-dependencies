@@ -23,6 +23,10 @@ module Bundler
         SPECS[name] = self
       end
 
+      def include_dependency?(gem)
+        dependencies.include_dependency?(gem)
+      end
+
       def flatten
         dependencies.inject([]) do |arr, dependency|
           arr << dependency

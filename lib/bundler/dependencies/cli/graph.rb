@@ -2,14 +2,9 @@ module Bundler
   module Dependencies
     class CLI < ::Thor
       class Graph < Command
-        def initialize(gem, options)
-          @gem = gem
-          super(options)
-        end
+        include CLI::WithGem
 
       private
-
-        attr_reader :gem
 
         def to_s
           if gems.empty?
@@ -22,10 +17,6 @@ module Bundler
 
         def graph
           gem ? Bundler::Dependencies::Graph.new(specs: [super.find(gem)]) : super
-        end
-
-        def gems
-          @gems ||= graph.without(*without)
         end
       end
     end

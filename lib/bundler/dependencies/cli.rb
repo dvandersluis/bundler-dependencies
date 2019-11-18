@@ -16,12 +16,18 @@ module Bundler
       default_task :count
       map '--version' => :version
 
+      desc 'version', 'Prints the bundler-dependencies version'
+      def version
+        puts "#{File.basename($PROGRAM_NAME)} #{VERSION}"
+      end
+
       desc 'count', 'Count the number of dependencies each gem in the bundle relies on, recursively'
       shared_options
       method_option :minimum, type: :numeric, desc: 'Report only gems with a minimum N dependencies', aliases: ['-m'], default: 0
 
       def count(*args)
         return help(:count) if args.first == 'help'
+
         Count.new(options).output
       end
 
@@ -30,12 +36,17 @@ module Bundler
 
       def graph(gem = nil)
         return help(:graph) if gem == 'help'
+
         Graph.new(gem, options).output
       end
 
-      desc 'version', 'Prints the bundler-dependencies version'
-      def version
-        puts "#{File.basename($PROGRAM_NAME)} #{VERSION}"
+      desc 'find [GEM]', 'Output gems in the bundle that depend on GEM'
+      shared_options
+
+      def find(gem = nil)
+        return help(:find) if gem.nil? || gem == 'help'
+
+        Find.new(gem, options).output
       end
     end
   end

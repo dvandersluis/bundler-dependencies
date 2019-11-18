@@ -18,6 +18,14 @@ Check how many dependencies each gem in the Gemfile has (use the `--minimum N` s
 bundle dependencies [count] [--minimum N] 
 ```
 
+### Find
+
+Find all the gems in the Gemfile that depend on a given gem (either directly or indirectly), as well as all the dependency paths for that gem.
+
+```sh
+bundle dependencies find GEM
+```
+
 ### Graph
 
 See a graph of all dependencies:

@@ -53,7 +53,7 @@ module Bundler
 
       def include_dependency?(gem)
         gem = Spec.new(gem) unless gem.is_a?(Spec)
-        include?(gem) || any? { |spec| spec.dependencies.include_dependency?(gem) }
+        include?(gem) || any? { |spec| spec.include_dependency?(gem) }
       end
 
       def without(*gems)
