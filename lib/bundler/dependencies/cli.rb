@@ -11,9 +11,10 @@ module Bundler
       map '--version' => :version
 
       desc 'check', 'Checks for gems that install too many dependencies'
-      method_option :minimum, type: :numeric, desc: 'Report only gems with a minimum N dependencies', aliases: ['-m', '--min'], default: 0
       method_option :path, type: :string, desc: 'Path to Gemfile.lock to scan', default: Bundler.default_lockfile
+      method_option :minimum, type: :numeric, desc: 'Report only gems with a minimum N dependencies', aliases: ['-m', '--min'], default: 0
       method_option :without, type: :array, desc: 'Gems to ignore', aliases: ['-W']
+      method_option :without_rails, type: :boolean, default: false, desc: 'Ignore all Rails gems', aliases: ['-R']
 
       def check
         Check.new(options).output
@@ -22,6 +23,7 @@ module Bundler
       desc 'graph [GEM]', 'Outputs a dependency graph'
       method_option :path, type: :string, desc: 'Path to Gemfile.lock to scan', default: Bundler.default_lockfile
       method_option :without, type: :array, desc: 'Gems to ignore', aliases: ['-W']
+      method_option :without_rails, type: :boolean, default: false, desc: 'Ignore all Rails gems', aliases: ['-R']
 
       def graph(gem = nil)
         Graph.new(gem, options).output

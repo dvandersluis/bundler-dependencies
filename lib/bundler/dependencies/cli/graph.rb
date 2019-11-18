@@ -12,7 +12,7 @@ module Bundler
         attr_reader :gem
 
         def to_s
-          Visitors::ShellTree.new.walk(graph.without(*options.without), shell)
+          Visitors::ShellTree.new.walk(graph.without(*without), shell)
         end
 
         def graph

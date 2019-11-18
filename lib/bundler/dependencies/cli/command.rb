@@ -2,6 +2,11 @@ module Bundler
   module Dependencies
     class CLI < ::Thor
       class Command < ::Thor
+        RAILS_GEMS = %w(
+          rails actioncable actionmailbox actionmailer actionpack actiontext actionview
+          activejob activemodel activerecord activestorage activesupport railties
+        ).freeze
+
         def initialize(options)
           @options = options
         end
@@ -22,6 +27,12 @@ module Bundler
 
         def graph
           @graph ||= scanner.graph
+        end
+
+        def without
+          (options.without || []).tap do |gems|
+            gems.concat(RAILS_GEMS) if options.without_rails?
+          end
         end
 
         def warn(message)

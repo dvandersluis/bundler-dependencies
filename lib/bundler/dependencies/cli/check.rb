@@ -11,7 +11,7 @@ module Bundler
         end
 
         def counts
-          @counts ||= graph.without(*options.without).counts(min: options.minimum)
+          @counts ||= graph.without(*without).counts(min: options.minimum)
         end
 
         def warnings
