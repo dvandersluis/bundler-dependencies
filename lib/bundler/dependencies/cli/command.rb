@@ -34,8 +34,15 @@ module Bundler
         def path
           return options.path if valid_gemfile?(options.path)
 
-          SharedHelpers.chdir(File.dirname(options.path)) if options.path
+          dir = path_dir(options.path)
+          SharedHelpers.chdir(dir) if dir
           SharedHelpers.default_lockfile
+        end
+
+        def path_dir(path)
+          return nil unless path
+
+          Dir.exist?(options.path) ? options.path : File.dirname(options.path)
         end
 
         def valid_gemfile?(path)
