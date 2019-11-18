@@ -16,18 +16,20 @@ module Bundler
       default_task :count
       map '--version' => :version
 
-      desc 'count', 'Checks for gems that install too many dependencies'
+      desc 'count', 'Count the number of dependencies each gem in the bundle relies on, recursively'
       shared_options
       method_option :minimum, type: :numeric, desc: 'Report only gems with a minimum N dependencies', aliases: ['-m'], default: 0
 
-      def count
+      def count(*args)
+        return help(:count) if args.first == 'help'
         Count.new(options).output
       end
 
-      desc 'graph [GEM]', 'Outputs a dependency graph'
+      desc 'graph [GEM]', 'Output a graph of dependencies, for all gems in the bundle or a specific gem'
       shared_options
 
       def graph(gem = nil)
+        return help(:graph) if gem == 'help'
         Graph.new(gem, options).output
       end
 
