@@ -28,7 +28,7 @@ RSpec.describe Bundler::Dependencies::CLI do
     end
 
     context 'with a minimum N' do
-      let(:args) { %w(--min 5) }
+      let(:args) { %w(--minimum 5) }
 
       it 'only outputs gems with at least N dependencies' do
         expect { subject }.to output(<<~STRING).to_stdout
