@@ -11,6 +11,7 @@ module Bundler
         method_option :path, type: :string, desc: 'Path to Gemfile.lock to scan'
         method_option :without, type: :array, desc: 'Gems to ignore', aliases: ['-W']
         method_option :without_rails, type: :boolean, default: false, desc: 'Ignore all Rails gems', aliases: ['-R']
+        method_option :color, type: :boolean, default: true, desc: 'Colorize output'
       end
 
       default_task :count

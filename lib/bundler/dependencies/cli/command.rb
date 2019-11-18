@@ -9,6 +9,7 @@ module Bundler
 
         def initialize(options)
           @options = options
+          self.shell = Thor::Shell::Basic.new unless options.color?
         end
 
         no_commands do
