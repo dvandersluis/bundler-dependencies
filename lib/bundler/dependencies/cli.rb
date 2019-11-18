@@ -24,9 +24,7 @@ module Bundler
       method_option :without, type: :array, desc: 'Gems to ignore', aliases: ['-W']
 
       def graph(gem = nil)
-        scanner = Scanner.new(options.path)
-        graph = gem ? Graph.new(specs: [Spec.find(gem)]) : scanner.graph
-        Visitors::ShellTree.new.walk(graph.without(*options.without), shell)
+        Graph.new(gem, options).output
       end
 
       desc 'version', 'Prints the bundler-dependencies version'

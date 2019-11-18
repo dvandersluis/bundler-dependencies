@@ -8,7 +8,9 @@ require 'bundler/dependencies/scanner'
 require 'bundler/dependencies/spec'
 require 'bundler/dependencies/visitor'
 
+require 'bundler/dependencies/cli/command'
 require 'bundler/dependencies/cli/check'
+require 'bundler/dependencies/cli/graph'
 
 require 'bundler/dependencies/visitors/shell_tree'
 
