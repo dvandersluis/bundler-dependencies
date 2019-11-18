@@ -42,6 +42,7 @@ module Bundler
 
       desc 'find [GEM]', 'Output gems in the bundle that depend on GEM'
       shared_options
+      method_option :quiet, type: :boolean, default: false, desc: 'Show only the number of gems and no other output', aliases: ['-q']
 
       def find(gem = nil)
         return help(:find) if gem.nil? || gem == 'help'

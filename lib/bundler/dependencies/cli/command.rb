@@ -41,7 +41,7 @@ module Bundler
         def valid_gemfile?(path)
           return false unless path && File.exist?(path)
 
-          %w(Gemfile.lock gems.locked).include?(File.basename(path))
+          File.basename(path).end_with?('.lock', '.locked')
         end
 
         def without

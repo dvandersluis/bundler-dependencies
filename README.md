@@ -20,10 +20,16 @@ bundle dependencies [count] [--minimum N]
 
 ### Find
 
-Find all the gems in the Gemfile that depend on a given gem (either directly or indirectly), as well as all the dependency paths for that gem.
+Find all the gems in the Gemfile that depend on a given gem (either directly or indirectly), as well as all the dependency paths for that gem:
 
 ```sh
 bundle dependencies find GEM
+```
+
+Get just the number of dependent gems:
+
+```sh
+bundle dependencies find GEM --quiet
 ```
 
 ### Graph

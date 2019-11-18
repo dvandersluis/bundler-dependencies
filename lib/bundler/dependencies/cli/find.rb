@@ -12,10 +12,8 @@ module Bundler
             exit(1)
           end
 
-          say("#{dependents.count} gems depend on #{gem}:", :bold)
-          puts
-
-          paths
+          banner
+          paths unless options.quiet
         end
 
         def dependents
@@ -27,9 +25,17 @@ module Bundler
 
         def paths
           dependents.each do |gem, paths|
+            puts
             say(gem, %i(bold))
             paths.each { |p| say "  * #{p}" }
-            puts
+          end
+        end
+
+        def banner
+          if options.quiet?
+            puts dependents.count
+          else
+            say("#{dependents.count} gems depend on #{gem}:", :bold)
           end
         end
       end

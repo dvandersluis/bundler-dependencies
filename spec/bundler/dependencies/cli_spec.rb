@@ -154,21 +154,32 @@ RSpec.describe Bundler::Dependencies::CLI do
     context 'for a gem in the bundle' do
       let(:args) { %w(ast) }
 
-      it 'outputs all the dependency paths for the gem' do
-        expect { subject }.to output(<<~STRING).to_stdout
-          3 gems depend on ast:
+      context 'in quiet mode' do
+        let(:args) { %w(ast --quiet) }
 
-          codeshift
-            * codeshift → parser → ast
+        it 'outputs the number of dependents' do
+          expect { subject }.to output(<<~STRING).to_stdout
+            3
+          STRING
+        end
+      end
 
-          gelauto
-            * gelauto → parser → ast
+      context 'in loud mode' do
+        it 'outputs all the dependency paths for the gem' do
+          expect { subject }.to output(<<~STRING).to_stdout
+            3 gems depend on ast:
 
-          rubocop_defaults
-            * rubocop_defaults → rubocop → parser → ast
-            * rubocop_defaults → rubocop-rspec → rubocop → parser → ast
+            codeshift
+              * codeshift → parser → ast
 
-        STRING
+            gelauto
+              * gelauto → parser → ast
+
+            rubocop_defaults
+              * rubocop_defaults → rubocop → parser → ast
+              * rubocop_defaults → rubocop-rspec → rubocop → parser → ast
+          STRING
+        end
       end
     end
 
