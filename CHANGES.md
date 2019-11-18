@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.6.0
+## 0.6.0 (2019-11-18)
 
 ### New features
 * Add `find` command to find all gems in the Gemfile which depend on a given gem.
