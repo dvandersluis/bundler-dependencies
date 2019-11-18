@@ -26,7 +26,7 @@ bundle dependencies graph GEMNAME
 
 ### Command Options
 
-* `--path PATH`: Check the Gemfile at `PATH`, rather than the current project's Gemfile.
+* `--path PATH`: User the Gemfile for the project at `PATH`, rather than the current project's Gemfile.
 * `--without foo bar baz`/`-W foo bar baz`: Exclude the listed gems from the scan. Any uses either directly in your Gemfile or as dependencies will be excluded, and not be counted.
 * `--without-rails`/`-R`: Quick option to exclude all 1st party Rails gems from the scan.
 
