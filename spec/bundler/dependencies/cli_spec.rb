@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'matchers/output_help'
 
 RSpec.describe Bundler::Dependencies::CLI do
   def run_task(name, *args)
@@ -58,6 +59,14 @@ RSpec.describe Bundler::Dependencies::CLI do
         STRING
       end
     end
+
+    context 'when passed help' do
+      let(:args) { %w(help) }
+
+      it 'outputs the help' do
+        expect { subject }.to output_help(:count)
+      end
+    end
   end
 
   describe '#graph' do
@@ -115,6 +124,25 @@ RSpec.describe Bundler::Dependencies::CLI do
             - ruby-progressbar
             - unicode-display_width
         STRING
+      end
+    end
+
+    context 'with a gem not in the bundle' do
+      let(:args) { %w(foo) }
+
+      it 'outputs an error' do
+        expect { subject }.to raise_error(SystemExit).
+          and output(<<~STRING).to_stderr
+            foo is not present in your bundle.
+          STRING
+      end
+    end
+
+    context 'when passed help' do
+      let(:args) { %w(help) }
+
+      it 'outputs the help' do
+        expect { subject }.to output_help(:graph)
       end
     end
   end

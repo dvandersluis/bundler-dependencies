@@ -24,6 +24,10 @@ RSpec.describe Bundler::Dependencies::Graph do
       expect(described_class.new).to be_empty
     end
 
+    it 'returns true if specs is an array of nil' do
+      expect(described_class.new(specs: [nil])).to be_empty
+    end
+
     it 'returns false for a graph with specs' do
       expect(graph).to_not be_empty
     end
@@ -53,7 +57,6 @@ RSpec.describe Bundler::Dependencies::Graph do
 
     it 'removes multiple gems' do
       expect(graph.without(:baz, :quux)).to be_empty
-      expect(graph).to_not be_empty
     end
 
     it 'removes dependencies' do
@@ -66,7 +69,7 @@ RSpec.describe Bundler::Dependencies::Graph do
     end
   end
 
-  describe 'include?' do
+  describe '#include?' do
     it 'returns true when the gem is a direct dependency' do
       expect(graph).to include(:baz)
     end
@@ -80,7 +83,7 @@ RSpec.describe Bundler::Dependencies::Graph do
     end
   end
 
-  describe 'include_dependency?' do
+  describe '#include_dependency?' do
     it 'returns true when the gem is a direct dependency' do
       expect(graph).to include_dependency(:baz)
     end
@@ -91,6 +94,16 @@ RSpec.describe Bundler::Dependencies::Graph do
 
     it 'returns false when the gem is not in the graph' do
       expect(graph).to_not include_dependency(:test)
+    end
+  end
+
+  describe '#find' do
+    it 'returns a spec if it is in the graph' do
+      expect(graph.find(:bar)).to eq(Bundler::Dependencies::Spec.new(:bar))
+    end
+
+    it 'does not return a spec if it is in the graph' do
+      expect(graph.find(:monkey)).to be_nil
     end
   end
 end

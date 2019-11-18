@@ -55,7 +55,8 @@ module Bundler
         end
 
         def error(message)
-          say(message, %i(bold red))
+          message = shell.send(:prepare_message, message, :red, :bold)
+          super(message)
         end
       end
     end

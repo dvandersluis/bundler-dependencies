@@ -12,11 +12,20 @@ module Bundler
         attr_reader :gem
 
         def to_s
-          Visitors::ShellTree.new.walk(graph.without(*without), shell)
+          if gems.empty?
+            error("#{gem} is not present in your bundle.")
+            exit(1)
+          end
+
+          Visitors::ShellTree.new.walk(gems, shell)
         end
 
         def graph
-          gem ? Bundler::Dependencies::Graph.new(specs: [Spec.find(gem)]) : super
+          gem ? Bundler::Dependencies::Graph.new(specs: [super.find(gem)]) : super
+        end
+
+        def gems
+          @gems ||= graph.without(*without)
         end
       end
     end

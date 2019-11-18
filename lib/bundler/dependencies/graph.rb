@@ -9,7 +9,7 @@ module Bundler
         if lockfile
           load_lockfile
         else
-          @specs = specs
+          @specs = specs.compact
         end
       end
 
@@ -24,6 +24,10 @@ module Bundler
 
       def each(&block)
         gems.each(&block)
+      end
+
+      def find(gem)
+        include_dependency?(gem) ? Spec.find(gem) : nil
       end
 
       def counts(min: 0)

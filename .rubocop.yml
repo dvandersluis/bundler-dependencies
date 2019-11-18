@@ -27,4 +27,5 @@ Style/NumericPredicate:
 
 Style/MethodCallWithArgsParentheses:
   IgnoredMethods:
+    - and
     - method_option

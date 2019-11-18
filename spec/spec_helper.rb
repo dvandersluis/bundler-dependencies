@@ -31,3 +31,5 @@ RSpec.configure do |config|
     end
   end)
 end
+
+Thor::Base.shell = Thor::Shell::Basic
