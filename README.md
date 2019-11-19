@@ -9,7 +9,9 @@ A project's `Gemfile.lock` shows some basic information about what gems are dire
 
 Each dependency is a potential point of failure, vulnerability, maintenance and *complexity* for a project, so the goal of `bundle dependencies` is to shed some light on what's being installed by what. This shouldn't stop you from installing gems that are useful to your project, but to be able to make an educated decision if a gem with 25 dependencies is a worthy tradeoff, for example.  
 
-## Commands
+## Usage
+
+Requires a `Gemfile.lock` or `gems.locked` file to evaluate.
 
 ### Count
 
@@ -46,6 +48,8 @@ bundle dependencies graph GEMNAME
 ```
 
 ### Command Options
+
+The following options can be used with any command:
 
 * `--path PATH`: User the Gemfile for the project at `PATH`, rather than the current project's Gemfile.
 * `--without foo bar baz`/`-W foo bar baz`: Exclude the listed gems from the scan. Any uses either directly in your Gemfile or as dependencies will be excluded, and not be counted.
