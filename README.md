@@ -41,8 +41,14 @@ bundler dependencies [command]
 
 Requires a `Gemfile.lock` or `gems.locked` file to evaluate.
 
-Run `bundle dependencies help` or `bundle dependencies help [command]` to get 
+## Commands
 
+**NOTE:** By default, `bundler dependencies` runs the `count` command.
+
+### Getting Help
+
+* `bundle dependencies help` to get an overview of all commands.
+* `bundle dependencies help COMMAND` to get help for a specific command.
 
 ### Count
 
@@ -85,11 +91,6 @@ The following options can be used with any command:
 * `--path PATH`: User the Gemfile for the project at `PATH`, rather than the current project's Gemfile.
 * `--without foo bar baz`/`-W foo bar baz`: Exclude the listed gems from the scan. Any uses either directly in your Gemfile or as dependencies will be excluded, and not be counted.
 * `--without-rails`/`-R`: Quick option to exclude all 1st party Rails gems from the scan.
-
-### Getting Help
-
-* `bundle dependencies help` to get an overview of all commands.
-* `bundle dependencies help COMMAND` to get help for a specific command.
 
 ## Development
 
