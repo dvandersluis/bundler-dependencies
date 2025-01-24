@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'thor'
 require 'bundler'
 require 'bundler/vendored_thor'

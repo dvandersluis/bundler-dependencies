@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bundler
   module Dependencies
     class Visitor
