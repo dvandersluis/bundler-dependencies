@@ -14,4 +14,4 @@ gem 'rubocop'
 gem 'rubocop-performance'
 gem 'rubocop-rspec'
 
-plugin 'bundler-dependencies', path: '.'
+plugin 'bundler-dependencies', path: '.' unless ENV['CI']

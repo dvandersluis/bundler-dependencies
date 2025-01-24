@@ -21,8 +21,8 @@ permissions:
   contents: read
 
 jobs:
-  lint-ruby:
-    name: Ruby
+  rubocop:
+    name: Run Rubocop
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
