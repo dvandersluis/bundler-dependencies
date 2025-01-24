@@ -1,6 +1,7 @@
 # Bundler::Dependencies
 
-[![Build Status](https://travis-ci.org/dvandersluis/bundler-dependencies.svg?branch=master)](https://travis-ci.org/dvandersluis/bundler-dependencies)
+![Test](https://github.com/dvandersluis/bundler-dependencies/actions/workflows/test.yml/badge.svg)
+![Lint](https://github.com/dvandersluis/bundler-dependencies/actions/workflows/lint.yml/badge.svg)
 [![Gem Version](https://badge.fury.io/rb/bundler-dependencies.svg)](https://badge.fury.io/rb/bundler-dependencies)
 
 Bundler plugin to inspect dependencies of gems used by your project.
