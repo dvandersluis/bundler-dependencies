@@ -9,9 +9,9 @@ name: Lint
 
 on:
   push:
-    branches: [ "master", "v1.0" ]
+    branches: [ "master" ]
   pull_request:
-    branches: [ "master", "v1.0" ]
+    branches: [ "master" ]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
