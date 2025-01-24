@@ -5,4 +5,9 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in bundler-dependencies.gemspec
 gemspec
 
-gem 'rubocop_defaults', github: 'dvandersluis/rubocop_defaults'
+gem 'pry'
+gem 'rake'
+gem 'rspec'
+gem 'rubocop'
+gem 'rubocop-performance'
+gem 'rubocop-rspec'
