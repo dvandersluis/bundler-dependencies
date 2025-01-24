@@ -27,6 +27,10 @@ Layout/ArgumentAlignment:
 Layout/EndAlignment:
   EnforcedStyleAlignWith: variable
 
+Naming/FileName:
+  Exclude:
+    - lib/bundler-dependencies.rb
+
 RSpec/ExampleLength:
   Max: 10
   Exclude:

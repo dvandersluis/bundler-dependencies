@@ -27,10 +27,6 @@ Gem::Specification.new do |spec|
     `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   end
 
-  glob = ->(patterns) { spec.files & Dir[*patterns] }
-  spec.executables = glob['bin/bundle*'].map { |path| File.basename(path) }
-  spec.default_executable = spec.executables.first if Gem::VERSION < '1.7.'
-
   spec.require_paths = ['lib']
 
   spec.add_dependency 'thor', '>= 1', '< 2'

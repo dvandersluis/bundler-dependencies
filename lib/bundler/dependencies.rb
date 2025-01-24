@@ -1,23 +1,24 @@
 # frozen_string_literal: true
 
-require 'bundler/dependencies/version'
-
 require 'bundler'
 
-require 'bundler/dependencies/cli'
-require 'bundler/dependencies/graph'
-require 'bundler/dependencies/scanner'
-require 'bundler/dependencies/spec'
-require 'bundler/dependencies/visitor'
+require_relative 'dependencies/version'
 
-require 'bundler/dependencies/cli/command'
-require 'bundler/dependencies/cli/with_gem'
-require 'bundler/dependencies/cli/count'
-require 'bundler/dependencies/cli/find'
-require 'bundler/dependencies/cli/graph'
+require_relative 'dependencies/cli'
+require_relative 'dependencies/command'
+require_relative 'dependencies/graph'
+require_relative 'dependencies/scanner'
+require_relative 'dependencies/spec'
+require_relative 'dependencies/visitor'
 
-require 'bundler/dependencies/visitors/shell_tree'
-require 'bundler/dependencies/visitors/paths'
+require_relative 'dependencies/cli/command'
+require_relative 'dependencies/cli/with_gem'
+require_relative 'dependencies/cli/count'
+require_relative 'dependencies/cli/find'
+require_relative 'dependencies/cli/graph'
+
+require_relative 'dependencies/visitors/shell_tree'
+require_relative 'dependencies/visitors/paths'
 
 module Bundler
   module Dependencies
