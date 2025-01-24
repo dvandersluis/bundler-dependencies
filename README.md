@@ -10,9 +10,39 @@ A project's `Gemfile.lock` shows some basic information about what gems are dire
 
 Each dependency is a potential point of failure, vulnerability, maintenance and *complexity* for a project, so the goal of `bundle dependencies` is to shed some light on what's being installed by what. This shouldn't stop you from installing gems that are useful to your project, but to be able to make an educated decision if a gem with 25 dependencies is a worthy tradeoff, for example.  
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+```sh
+plugin 'bundler-graph'
+```
+
+And then execute:
+
+```sh
+$ bundle install
+```
+
+Alternately, you can install the plugin directly:
+
+```sh
+$ bundle plugin install bundle-dependencies
+```
+
 ## Usage
 
+```sh
+bundler dependencies [command]
+                     [--path=PATH]                  # Path to Gemfile.lock to scan
+                     [-W, --without=one two three]  # Gems to ignore
+                     [-R, --without-rails]          # Ignore all Rails gems
+```
+
 Requires a `Gemfile.lock` or `gems.locked` file to evaluate.
+
+Run `bundle dependencies help` or `bundle dependencies help [command]` to get 
+
 
 ### Count
 

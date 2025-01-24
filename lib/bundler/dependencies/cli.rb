@@ -9,6 +9,8 @@ require 'bundler/dependencies'
 module Bundler
   module Dependencies
     class CLI < ::Thor
+      package_name 'bundler-dependencies'
+
       def self.shared_options
         method_option :path, type: :string, desc: 'Path to Gemfile.lock to scan'
         method_option :without, type: :array, desc: 'Gems to ignore', aliases: ['-W']
@@ -16,8 +18,19 @@ module Bundler
         method_option :color, type: :boolean, default: true, desc: 'Colorize output'
       end
 
+      def self.exit_on_failure?
+        true
+      end
+
+      def self.basename
+        'bundle dependencies'
+      end
+
       default_task :count
       map '--version' => :version
+      map '--help' => :help
+      map '-h' => :help
+      map '-?' => :help
 
       desc 'version', 'Prints the bundler-dependencies version'
       def version

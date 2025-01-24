@@ -13,3 +13,5 @@ gem 'rspec'
 gem 'rubocop'
 gem 'rubocop-performance'
 gem 'rubocop-rspec'
+
+plugin 'bundler-dependencies', path: '.'
