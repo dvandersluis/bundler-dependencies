@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bundler
   module Dependencies
     class Graph
@@ -31,12 +33,12 @@ module Bundler
       end
 
       def counts(min: 0)
-        @counts ||= map do |gem|
+        @counts ||= filter_map do |gem|
           count = gem.dependency_count
           next if count < min
 
           [gem.name, gem.dependency_count]
-        end.compact.sort_by(&:last).reverse.to_h
+        end.sort_by(&:last).reverse.to_h
       end
 
       def delete(*specs)
@@ -67,7 +69,7 @@ module Bundler
         self
       end
 
-    private
+      private
 
       attr_reader :lockfile, :specs
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bundler
   module Dependencies
     module Visitors
@@ -15,7 +17,7 @@ module Bundler
           nil
         end
 
-      private
+        private
 
         def say(shell, message, opts)
           if shell

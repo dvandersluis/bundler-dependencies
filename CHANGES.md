@@ -1,5 +1,17 @@
 # CHANGELOG
 
+## 1.0.0 (2025-01-24)
+
+### New features
+* Gem now works as a bundle plugin!
+
+### Bug fixes
+* Fixed command name outputted when calling `bundle dependencies help`.
+
+### Changes
+* Minimum supported Ruby version increased to 2.7.
+* `thor` version restrictions were relaxed, now allows any `1.x.y` version.
+
 ## 0.6.0 (2019-11-18)
 
 ### New features

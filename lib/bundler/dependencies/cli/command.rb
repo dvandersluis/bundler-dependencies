@@ -1,13 +1,16 @@
+# frozen_string_literal: true
+
 module Bundler
   module Dependencies
     class CLI < ::Thor
       class Command < ::Thor
-        RAILS_GEMS = %w(
+        RAILS_GEMS = %w[
           rails actioncable actionmailbox actionmailer actionpack actiontext actionview
           activejob activemodel activerecord activestorage activesupport railties
-        ).freeze
+        ].freeze
 
         def initialize(options)
+          super()
           @options = options
           self.shell = Thor::Shell::Basic.new unless options.color?
         end
@@ -20,7 +23,7 @@ module Bundler
           end
         end
 
-      private
+        private
 
         attr_reader :options
 
@@ -63,12 +66,12 @@ module Bundler
         end
 
         def warn(message)
-          say(message, %i(bold yellow))
+          say(message, %i[bold yellow])
         end
 
         def error(message)
           message = shell.send(:prepare_message, message, :red, :bold)
-          super(message)
+          super
         end
       end
     end

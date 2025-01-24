@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module Bundler
   module Dependencies
     class CLI < ::Thor
       class Graph < Command
         include CLI::WithGem
 
-      private
+        private
 
         def to_s
           if gems.empty?

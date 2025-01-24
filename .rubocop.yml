@@ -1,5 +1,9 @@
-inherit_gem:
-  rubocop_defaults: .rubocop.yml
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop/cop/internal_affairs
+  - rubocop-performance
+  - rubocop-rspec
 
 inherit_mode:
   merge:
@@ -7,17 +11,42 @@ inherit_mode:
     - IgnoredMethods
 
 AllCops:
-  TargetRubyVersion: 2.6
+  NewCops: enable
+  TargetRubyVersion: 3.0
+  SuggestExtensions:
+    rubocop-rake: false
   Exclude:
     - .pryrc
 
-Layout/IndentFirstArrayElement:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
+
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/EndAlignment:
+  EnforcedStyleAlignWith: variable
+
+Naming/FileName:
+  Exclude:
+    - lib/bundler-dependencies.rb
 
 RSpec/ExampleLength:
   Max: 10
   Exclude:
     - spec/bundler/dependencies/cli_spec.rb
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/NamedSubject:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Max: 5
+
+RSpec/NotToNot:
+  EnforcedStyle: to_not
 
 Style/FormatStringToken:
   Enabled: false
@@ -26,6 +55,6 @@ Style/NumericPredicate:
   Enabled: false
 
 Style/MethodCallWithArgsParentheses:
-  IgnoredMethods:
+  AllowedMethods:
     - and
     - method_option

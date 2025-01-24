@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bundler
   module Dependencies
     class CLI < ::Thor
@@ -7,7 +9,7 @@ module Bundler
           super(options)
         end
 
-      private
+        private
 
         attr_reader :gem
       end

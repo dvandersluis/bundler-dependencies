@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Bundler
   module Dependencies
     class Scanner
@@ -20,7 +22,7 @@ module Bundler
         "#{gem_count} gems scanned; #{spec_count} dependencies found"
       end
 
-    private
+      private
 
       attr_reader :lockfile
 
