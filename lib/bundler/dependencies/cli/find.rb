@@ -6,7 +6,7 @@ module Bundler
       class Find < Command
         include WithGem
 
-      private
+        private
 
         def to_s
           if dependents.empty?
@@ -28,7 +28,7 @@ module Bundler
         def paths
           dependents.each do |gem, paths|
             puts
-            say(gem, %i(bold))
+            say(gem, %i[bold])
             paths.each { |p| say "  * #{p}" }
           end
         end

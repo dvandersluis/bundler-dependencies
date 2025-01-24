@@ -17,7 +17,7 @@ module Bundler
           nil
         end
 
-      private
+        private
 
         def say(shell, message, opts)
           if shell

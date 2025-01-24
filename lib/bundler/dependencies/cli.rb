@@ -26,7 +26,9 @@ module Bundler
 
       desc 'count', 'Count the number of dependencies each gem in the bundle relies on, recursively'
       shared_options
-      method_option :minimum, type: :numeric, desc: 'Report only gems with a minimum N dependencies', aliases: ['-m'], default: 0
+      method_option :minimum, type: :numeric, desc: <<~DESC, aliases: ['-m'], default: 0
+        Report only gems with a minimum N dependencies
+      DESC
 
       def count(*args)
         return help(:count) if args.first == 'help'
@@ -45,7 +47,9 @@ module Bundler
 
       desc 'find [GEM]', 'Output gems in the bundle that depend on GEM'
       shared_options
-      method_option :quiet, type: :boolean, default: false, desc: 'Show only the number of gems and no other output', aliases: ['-q']
+      method_option :quiet, type: :boolean, default: false, desc: <<~DESC, aliases: ['-q']
+        Show only the number of gems and no other output
+      DESC
 
       def find(gem = nil)
         return help(:find) if gem.nil? || gem == 'help'

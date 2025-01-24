@@ -5,7 +5,7 @@ require 'matchers/output_help'
 
 RSpec.describe Bundler::Dependencies::CLI do
   def run_task(name, *args)
-    args.concat(%W(--path #{lockfile_path}))
+    args.push('--path', lockfile_path)
     described_class.start([name, *args])
   end
 
@@ -31,7 +31,7 @@ RSpec.describe Bundler::Dependencies::CLI do
     end
 
     context 'with a minimum N' do
-      let(:args) { %w(--minimum 5) }
+      let(:args) { %w[--minimum 5] }
 
       it 'only outputs gems with at least N dependencies' do
         expect { subject }.to output(<<~STRING).to_stdout
@@ -47,7 +47,7 @@ RSpec.describe Bundler::Dependencies::CLI do
     end
 
     context 'when excluding gems' do
-      let(:args) { %w(--without rubocop pry) }
+      let(:args) { %w[--without rubocop pry] }
 
       it 'does not output excluded gems' do
         expect { subject }.to output(<<~STRING).to_stdout
@@ -63,7 +63,7 @@ RSpec.describe Bundler::Dependencies::CLI do
     end
 
     context 'when passed help' do
-      let(:args) { %w(help) }
+      let(:args) { %w[help] }
 
       it 'outputs the help' do
         expect { subject }.to output_help(:count)
@@ -113,7 +113,7 @@ RSpec.describe Bundler::Dependencies::CLI do
     end
 
     context 'with a gem name' do
-      let(:args) { %w(rubocop) }
+      let(:args) { %w[rubocop] }
 
       it 'outputs only the graph for that gem' do
         expect { subject }.to output(<<~STRING).to_stdout
@@ -130,18 +130,18 @@ RSpec.describe Bundler::Dependencies::CLI do
     end
 
     context 'with a gem not in the bundle' do
-      let(:args) { %w(foo) }
+      let(:args) { %w[foo] }
 
       it 'outputs an error' do
-        expect { subject }.to raise_error(SystemExit).
-          and output(<<~STRING).to_stderr
+        expect { subject }.to raise_error(SystemExit)
+          .and output(<<~STRING).to_stderr
             foo is not present in your bundle.
           STRING
       end
     end
 
     context 'when passed help' do
-      let(:args) { %w(help) }
+      let(:args) { %w[help] }
 
       it 'outputs the help' do
         expect { subject }.to output_help(:graph)
@@ -154,10 +154,10 @@ RSpec.describe Bundler::Dependencies::CLI do
     let(:task) { :find }
 
     context 'for a gem in the bundle' do
-      let(:args) { %w(ast) }
+      let(:args) { %w[ast] }
 
       context 'in quiet mode' do
-        let(:args) { %w(ast --quiet) }
+        let(:args) { %w[ast --quiet] }
 
         it 'outputs the number of dependents' do
           expect { subject }.to output(<<~STRING).to_stdout
@@ -189,15 +189,15 @@ RSpec.describe Bundler::Dependencies::CLI do
       let(:args) { 'foo' }
 
       it 'outputs an error message' do
-        expect { subject }.to raise_error(SystemExit).
-          and output(<<~STRING).to_stderr
+        expect { subject }.to raise_error(SystemExit)
+          .and output(<<~STRING).to_stderr
             No gems in the bundle depend on foo.
         STRING
       end
     end
 
     context 'when passed help' do
-      let(:args) { %w(help) }
+      let(:args) { %w[help] }
 
       it 'outputs the help' do
         expect { subject }.to output_help(:find)

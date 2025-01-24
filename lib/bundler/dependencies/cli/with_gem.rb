@@ -9,7 +9,7 @@ module Bundler
           super(options)
         end
 
-      private
+        private
 
         attr_reader :gem
       end

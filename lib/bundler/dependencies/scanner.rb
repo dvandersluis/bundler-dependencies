@@ -22,7 +22,7 @@ module Bundler
         "#{gem_count} gems scanned; #{spec_count} dependencies found"
       end
 
-    private
+      private
 
       attr_reader :lockfile
 

@@ -4,7 +4,7 @@ module Bundler
   module Dependencies
     class CLI < ::Thor
       class Count < Command
-      private
+        private
 
         def to_s
           say(scanner.to_s, :bold)

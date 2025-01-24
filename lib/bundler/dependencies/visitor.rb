@@ -5,7 +5,7 @@ module Bundler
     class Visitor
       def self.walk(graph, depth = 0, &block)
         graph.each do |gem|
-          block.call(gem, depth)
+          yield(gem, depth)
           walk(gem.dependencies, depth + 1, &block) if gem.dependencies
         end
       end

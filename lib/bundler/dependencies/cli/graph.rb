@@ -6,7 +6,7 @@ module Bundler
       class Graph < Command
         include CLI::WithGem
 
-      private
+        private
 
         def to_s
           if gems.empty?
